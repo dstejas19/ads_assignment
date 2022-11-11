@@ -1,0 +1,19 @@
+CC = g++ -O2 -Wno-deprecated 
+
+tag = -i
+
+ifdef linux
+tag = -n
+endif
+
+main: AvlTree.o TreeNode.o main.o
+	$(CC) -o main AvlTree.o TreeNode.o main.o -lfl
+
+main.o: main.cc
+	$(CC) -g -c main.cc
+
+AvlTree.o: AvlTree.cc
+	$(CC) -g -c AvlTree.cc
+
+AvlTree.o: TreeNode.cc
+	$(CC) -g -c TreeNode.cc

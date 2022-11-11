@@ -1,7 +1,4 @@
 #include "AvlTree.h"
-
-#include <algorithm>
-#include <vector>
  
 // Driver Code
 int main()

@@ -64,7 +64,7 @@ const std::vector<const Key*> AvlTree :: search(int low, int high) {
 }
 
 void AvlTree :: insert(int key) {
-    std::stack<std::pair<TreeNode*, Direction>> pathStack = this->getPathStack();
+    std::stack<std::pair<TreeNode*, Direction> > pathStack = this->getPathStack();
 
     TreeNode* temp = new TreeNode(new Key(key), nullptr, nullptr);
 
@@ -171,7 +171,7 @@ void AvlTree :: rrRotation(TreeNode* gp, TreeNode* pp, TreeNode* p) {
     p->setLeft(gp);
 }
 
-void AvlTree :: updateParent(TreeNode* cur, std::stack<std::pair<TreeNode*, Direction>>& pathStack) {
+void AvlTree :: updateParent(TreeNode* cur, std::stack<std::pair<TreeNode*, Direction> >& pathStack) {
     if(pathStack.empty()) {
         this->root = cur;
 

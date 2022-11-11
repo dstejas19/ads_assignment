@@ -15,5 +15,9 @@ main.o: main.cc
 AvlTree.o: AvlTree.cc
 	$(CC) -g -c AvlTree.cc
 
-AvlTree.o: TreeNode.cc
+TreeNode.o: TreeNode.cc
 	$(CC) -g -c TreeNode.cc
+
+clean:
+	rm -f *.o
+	rm -f *.out

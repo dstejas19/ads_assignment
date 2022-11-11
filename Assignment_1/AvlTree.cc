@@ -1,6 +1,7 @@
 #include "AvlTree.h"
 
 AvlTree :: AvlTree()  {
+    this->root = nullptr;
 }
 
 AvlTree :: ~AvlTree()  {
@@ -183,4 +184,18 @@ void AvlTree :: updateParent(TreeNode* cur, std::stack<std::pair<TreeNode*, Dire
     else {
         pathStack.top().first->setRight(cur);
     }
+}
+
+void AvlTree :: print() {
+    dfs(root);
+}
+
+void AvlTree :: dfs(TreeNode* cur) {
+    if(!cur) {
+        return;
+    }
+
+    dfs(cur->getLeft());
+    std::cout<<cur->getData()->data<<std::endl;
+    dfs(cur->getRight());
 }

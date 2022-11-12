@@ -48,7 +48,7 @@ const std::vector<const Key*> AvlTree :: search(int low, int high) {
     while(cur || !s.empty()) {
         do {
             s.push(cur);
-            
+
             prev = cur;
             cur = cur->getLeft();
         } while(cur && prev->getData()->data >= low);
@@ -235,6 +235,8 @@ std::stack<std::pair<TreeNode*, Direction> > AvlTree :: getPathStack(int insertK
             direction = R;
         }
     }
+
+    return pathStack;
 }
 
 bool AvlTree :: isLeafNode(TreeNode* cur) {

@@ -18,9 +18,7 @@ int main()
     avlTree->insert(10);
     avlTree->insert(7);
     avlTree->insert(3);
-    avlTree->insert(3);
     avlTree->insert(5);
-    avlTree->insert(4);
     avlTree->insert(4);
     avlTree->insert(2);
     avlTree->insert(12);

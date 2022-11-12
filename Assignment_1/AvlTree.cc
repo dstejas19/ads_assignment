@@ -122,10 +122,10 @@ void AvlTree :: insert(int key) {
 
 void AvlTree :: updateHeights(TreeNode* temp) {
     if(temp->getLeft()) {
-        temp->setLeftHeight(temp->getLeft()->getHeight());
+        temp->setLeftHeight(temp->getLeft()->getHeight() + 1);
     }
     if(temp->getRight()) {
-        temp->setRightHeight(temp->getRight()->getHeight());
+        temp->setRightHeight(temp->getRight()->getHeight() + 1);
     }
 }
 

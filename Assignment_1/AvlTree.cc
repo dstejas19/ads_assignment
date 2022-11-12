@@ -101,7 +101,7 @@ void AvlTree :: insert(int key) {
         int balanceFactor = this->getBalanceFactor(cur);
 
         if(balanceFactor == 0) {
-            return;
+            break;
         }
         else if(balanceFactor == 2 || balanceFactor == -2) {
             RotationType rotationType = this->getRotationType(balanceFactor, cur);
@@ -109,9 +109,11 @@ void AvlTree :: insert(int key) {
 
             this->updateParent(cur, pathStack, direction);
             
-            return;
+            break;
         }
     }
+
+    std::cout<<"Inserted "<<key<<" to the tree"<<std::endl;
 }
 
 void AvlTree :: updateHeights(TreeNode* temp) {

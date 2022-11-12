@@ -266,6 +266,7 @@ void AvlTree :: levelPrint() {
             }
 
             std::cout<<"Left height is "<<temp->getLeftHeight()<<" and Right height is "<<temp->getRightHeight()<<" and height is "<<temp->getHeight()<<std::endl;
+            ++level;
         }
     }
 }

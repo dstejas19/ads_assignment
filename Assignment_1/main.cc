@@ -36,10 +36,27 @@ int main()
     std::cout<<"Search starts"<<std::endl;
 
     std::cout<<avlTree->search(5)->data<<std::endl;
+    std::cout<<avlTree->search(-3)->data<<std::endl;
+    std::cout<<avlTree->search(100)->data<<std::endl;
+    std::cout<<avlTree->search(8)->data<<std::endl;
+
+    std::cout<<"Search with bounds starts"<<std::endl;
 
     const std::vector<const Key*> keys = avlTree->search(10, 23);
 
     for(auto &a:keys) {
+        std::cout<<a->data<<std::endl;
+    }
+
+    const std::vector<const Key*> keys1 = avlTree->search(-5, 1);
+
+    for(auto &a:keys1) {
+        std::cout<<a->data<<std::endl;
+    }
+
+    const std::vector<const Key*> keys2 = avlTree->search(100, 1011);
+
+    for(auto &a:keys2) {
         std::cout<<a->data<<std::endl;
     }
 

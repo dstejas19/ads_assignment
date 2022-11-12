@@ -138,6 +138,7 @@ void AvlTree :: insert(int key) {
 }
 
 void AvlTree :: remove(int key) {
+    std::cout<<"Deleting "<<key<<" from the tree"<<std::endl;
     std::stack<std::pair<TreeNode*, Direction> > pathStack = this->avlTreeHelper->getPathStack(this->root, key);
 
     TreeNode* toBeRemoved = pathStack.top().first;
@@ -191,6 +192,8 @@ void AvlTree :: remove(int key) {
             this->updateParent(cur, pathStack, direction);
         }
     }
+
+    std::cout<<"Deleted "<<key<<" from the tree"<<std::endl;
 }
 
 void AvlTree :: updateParent(TreeNode* cur, std::stack<std::pair<TreeNode*, Direction> >& pathStack, Direction direction) {

@@ -7,7 +7,7 @@ tag = -n
 endif
 
 main: AvlTreeHelper.o AvlTree.o TreeNode.o main.o
-	$(CC) -o main AvlTree.o TreeNode.o main.o -lfl
+	$(CC) -o main AvlTreeHelper.o AvlTree.o TreeNode.o main.o -lfl
 
 main.o: main.cc
 	$(CC) -g -c main.cc

@@ -191,6 +191,7 @@ void AvlTree :: llRotation(TreeNode* gp, TreeNode* pp, TreeNode* p) {
 }
 
 void AvlTree :: rrRotation(TreeNode* gp, TreeNode* pp, TreeNode* p) {
+    std::cout<<"coming here"<<std::endl;
     TreeNode* b = pp->getLeft();
 
     gp->setRight(b);

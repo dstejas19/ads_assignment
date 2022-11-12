@@ -77,11 +77,13 @@ void AvlTree :: insert(int key) {
 
     if(pathStack.empty()) {
         this->root = temp;
+        return;
     }
 
     int leafValue = pathStack.top().first->getData()->data;
 
     if(leafValue == key) {
+        std::cout<<"Key "<<key<<" is already present in the tree"<<std::endl;
         delete temp;
         return;
     }
@@ -237,6 +239,8 @@ std::stack<std::pair<TreeNode*, Direction> > AvlTree :: getPathStack(int insertK
             direction = R;
         }
     }
+
+    std::cout<<"The path stack is empty"<<std::endl;
 
     return pathStack;
 }

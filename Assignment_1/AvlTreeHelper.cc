@@ -140,7 +140,7 @@ RotationType AvlTreeHelper :: getRotationType(int balanceFactor, TreeNode* cur) 
     if(balanceFactor > 0) {
         TreeNode* left = cur->getLeft();
 
-        if(left->getLeftHeight() > left->getRightHeight()) {
+        if(left->getLeftHeight() >= left->getRightHeight()) {
             std::cout<<"LL rotation to be done"<<std::endl;
             return LL;
         }
@@ -151,7 +151,7 @@ RotationType AvlTreeHelper :: getRotationType(int balanceFactor, TreeNode* cur) 
 
     TreeNode* right = cur->getRight();
 
-    if(right->getRightHeight() > right->getLeftHeight()) {
+    if(right->getRightHeight() >= right->getLeftHeight()) {
         std::cout<<"RR rotation to be done"<<std::endl;
         return RR;
     }

@@ -189,8 +189,6 @@ void AvlTree :: remove(int key) {
             RotationType rotationType = this->avlTreeHelper->getRotationType(balanceFactor, cur);
             cur = this->avlTreeHelper->rotateTree(rotationType, cur);
             this->updateParent(cur, pathStack, direction);
-            
-            break;
         }
     }
 }

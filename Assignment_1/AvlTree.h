@@ -16,7 +16,7 @@ private:
     void updateHeights(TreeNode* temp);
     int getBalanceFactor(TreeNode* temp);
     RotationType getRotationType(int balanceFactor, TreeNode* cur);
-    void rotateTree(RotationType, TreeNode* cur);
+    TreeNode* rotateTree(RotationType, TreeNode* cur);
     void updateParent(TreeNode* cur, std::stack<std::pair<TreeNode*, Direction> >& pathStack, Direction direction);
     void llRotation(TreeNode* gp, TreeNode* pp, TreeNode* p);
     void rrRotation(TreeNode* gp, TreeNode* pp, TreeNode* p);

@@ -110,7 +110,7 @@ void AvlTree :: insert(int key) {
         else if(balanceFactor == 2 || balanceFactor == -2) {
             std::cout<<"Balancing has to be done. The balance factor is "<<balanceFactor<<std::endl;
             RotationType rotationType = this->getRotationType(balanceFactor, cur);
-            this->rotateTree(rotationType, cur);
+            cur = this->rotateTree(rotationType, cur);
             this->updateParent(cur, pathStack, direction);
             
             break;
@@ -160,30 +160,35 @@ RotationType AvlTree :: getRotationType(int balanceFactor, TreeNode* cur) {
     return RL;
 }
 
-void AvlTree :: rotateTree(RotationType rotationType, TreeNode* cur) {
+TreeNode* AvlTree :: rotateTree(RotationType rotationType, TreeNode* cur) {
     switch(rotationType) {
         case LL: 
             std::cout<<"Performing LL rotation"<<std::endl;
             llRotation(cur, cur->getLeft(), cur->getLeft()->getLeft());
-            break;
+
+            return cur->getLeft();
 
         case RR:
             std::cout<<"Performing RR rotation"<<std::endl;
             rrRotation(cur, cur->getRight(), cur->getRight()->getRight());
-            break;
+            return cur->getRight();
 
         case LR:
             std::cout<<"Performing LR rotation"<<std::endl;
             rrRotation(cur->getLeft(), cur->getLeft()->getRight(), cur->getLeft()->getRight()->getRight());
             llRotation(cur, cur->getLeft(), cur->getLeft());
-            break;
+
+            return cur->getLeft();
 
         case RL:
             std::cout<<"Performing RL rotation"<<std::endl;
             llRotation(cur->getRight(), cur->getRight()->getLeft(), cur->getRight()->getLeft()->getLeft());
             rrRotation(cur, cur->getRight(), cur->getRight());
-            break;
+
+            return cur->getRight();
     }
+
+    return nullptr;
 }
 
 void AvlTree :: llRotation(TreeNode* gp, TreeNode* pp, TreeNode* p) {

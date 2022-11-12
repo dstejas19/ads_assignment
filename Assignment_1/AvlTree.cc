@@ -89,9 +89,11 @@ void AvlTree :: insert(int key) {
         return;
     }
     else if(leafValue > key) {
+        std::cout<<"Inserting "<<key<<" to left of "<<leafValue<<std::endl;
         pathStack.top().first->setLeft(temp);
     }
     else {
+        std::cout<<"Inserting "<<key<<" to right of "<<leafValue<<std::endl;
         pathStack.top().first->setRight(temp);
     }
     pathStack.pop();

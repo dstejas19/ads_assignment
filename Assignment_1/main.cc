@@ -27,20 +27,20 @@ int main()
 
     std::cout<<"New Tree Initialized"<<std::endl;
 
-    avlTree->insert(1);
-    avlTree->insert(3);
-    avlTree->insert(7);
-    avlTree->insert(6);
-    avlTree->insert(4);
-    avlTree->insert(5);
-    avlTree->insert(2);
+    // avlTree->insert(1);
+    // avlTree->insert(3);
+    // avlTree->insert(7);
+    // avlTree->insert(6);
+    // avlTree->insert(4);
+    // avlTree->insert(5);
+    // avlTree->insert(2);
 
-    avlTree->remove(6);
-    avlTree->remove(7);
-    avlTree->remove(5);
+    // avlTree->remove(6);
+    // avlTree->remove(7);
+    // avlTree->remove(5);
 
-    avlTree->print();
-    avlTree->levelPrint();
+    // avlTree->print();
+    // avlTree->levelPrint();
 
     avlTree->insert(10);
     avlTree->insert(7);
@@ -53,17 +53,18 @@ int main()
     avlTree->insert(12);
     avlTree->insert(16);
     avlTree->insert(13);
+    avlTree->insert(14);
     avlTree->insert(19);
     avlTree->insert(22);
     avlTree->insert(25);
     avlTree->insert(17);
 
+    // avlTree->remove(22);
+    avlTree->remove(17); //LR
+    avlTree->remove(3); //RR
     avlTree->remove(22);
-    avlTree->remove(19);
-    avlTree->remove(3);
-    avlTree->remove(6);
-    avlTree->remove(7);
-    avlTree->remove(12);
+    avlTree->remove(25); //LL
+    avlTree->remove(13); //RL
 
     avlTree->print();
     avlTree->levelPrint();

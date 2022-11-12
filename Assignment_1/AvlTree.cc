@@ -137,6 +137,64 @@ void AvlTree :: insert(int key) {
     std::cout<<"---------"<<std::endl;
 }
 
+void AvlTree :: remove(int key) {
+    std::stack<std::pair<TreeNode*, Direction> > pathStack = this->avlTreeHelper->getPathStack(this->root, key);
+
+    TreeNode* toBeRemoved = pathStack.top().first;
+    Direction toBeRemovedDirection = pathStack.top().second;
+
+    if(!toBeRemoved || toBeRemoved->getData()->data != key) {
+        std::cout<<"Key is not present"<<std::endl;
+
+        return;
+    }
+
+    if(avlTreeHelper->isLeafNode(toBeRemoved)) {
+        pathStack.pop();
+        updateParent(nullptr, pathStack, toBeRemovedDirection);
+
+        delete toBeRemoved;
+    }
+    else {
+        avlTreeHelper->getPrevHighest(pathStack);
+
+        if(pathStack.top().first == toBeRemoved) {
+            avlTreeHelper->getNextLowest(pathStack);
+        }
+
+        TreeNode* toBeReplaced = pathStack.top().first;
+        Direction replacedDirection = pathStack.top().second;
+        pathStack.pop();
+
+        toBeRemoved->setData(toBeReplaced->getData()->data);
+
+        updateParent(nullptr, pathStack, replacedDirection);
+
+        delete toBeReplaced;
+    }
+
+    while(!pathStack.empty()) {
+        TreeNode* cur = pathStack.top().first;
+        Direction direction = pathStack.top().second;
+        pathStack.pop();
+
+        avlTreeHelper->updateHeights(cur);
+
+        int balanceFactor = this->avlTreeHelper->getBalanceFactor(cur);
+        if(balanceFactor == 1 || balanceFactor == -1) {
+            break;
+        }
+        else if(balanceFactor == 2 || balanceFactor == -2) {
+            std::cout<<"Balancing has to be done. The balance factor is "<<balanceFactor<<std::endl;
+            RotationType rotationType = this->avlTreeHelper->getRotationType(balanceFactor, cur);
+            cur = this->avlTreeHelper->rotateTree(rotationType, cur);
+            this->updateParent(cur, pathStack, direction);
+            
+            break;
+        }
+    }
+}
+
 void AvlTree :: updateParent(TreeNode* cur, std::stack<std::pair<TreeNode*, Direction> >& pathStack, Direction direction) {
     if(pathStack.empty()) {
         this->root = cur;

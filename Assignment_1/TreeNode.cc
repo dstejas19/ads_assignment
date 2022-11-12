@@ -41,6 +41,10 @@ int TreeNode :: getHeight() {
     return this->leftHeight >= this->rightHeight ? leftHeight : rightHeight;
 }
 
+void TreeNode :: setData(int _data) {
+    this->data->data = _data;
+}
+
 void TreeNode :: setLeftHeight(int _leftHeight) {
     this->leftHeight = _leftHeight;
 }

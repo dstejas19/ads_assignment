@@ -23,4 +23,6 @@ public:
     void updateHeights(TreeNode* temp);
     int getBalanceFactor(TreeNode* temp);
     RotationType getRotationType(int balanceFactor, TreeNode* cur);
+    void getPrevHighest(std::stack<std::pair<TreeNode*, Direction> >& pathStack);
+    void getNextLowest(std::stack<std::pair<TreeNode*, Direction> >& pathStack);
 };

@@ -205,3 +205,35 @@ void AvlTreeHelper :: levelPrint(TreeNode* cur) {
         ++level;
     }
 }
+
+void AvlTreeHelper :: getPrevHighest(std::stack<std::pair<TreeNode*, Direction> >& pathStack) {
+    TreeNode* cur = pathStack.top().first;
+    if(!cur->getLeft()) {
+        return;
+    }
+
+    cur = cur->getLeft();
+    pathStack.push({cur, L});
+    cur = cur->getRight();
+
+    while(cur) {
+        pathStack.push({cur, R});
+        cur = cur->getRight();
+    }
+}
+
+void AvlTreeHelper :: getNextLowest(std::stack<std::pair<TreeNode*, Direction> >& pathStack) {
+    TreeNode* cur = pathStack.top().first;
+    if(!cur->getRight()) {
+        return;
+    }
+
+    cur = cur->getRight();
+    pathStack.push({cur, R});
+    cur = cur->getLeft();
+
+    while(cur) {
+        pathStack.push({cur, L});
+        cur = cur->getLeft();
+    }
+}

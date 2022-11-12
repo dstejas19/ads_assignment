@@ -23,6 +23,7 @@ public:
     TreeNode* getLeft();
     TreeNode* getRight();
 
+    void setData(int _data);
     void setLeftHeight(int _leftHeight);
     void setRightHeight(int _rightHeight);
     void setLeft(TreeNode* _left);

@@ -39,24 +39,32 @@ int main()
     avlTree->remove(7);
     avlTree->remove(5);
 
-    // avlTree->insert(10);
-    // avlTree->insert(7);
-    // avlTree->insert(3);
-    // avlTree->insert(3);
-    // avlTree->insert(5);
-    // avlTree->insert(4);
-    // avlTree->insert(4);
-    // avlTree->insert(2);
-    // avlTree->insert(12);
-    // avlTree->insert(16);
-    // avlTree->insert(13);
-    // avlTree->insert(19);
-    // avlTree->insert(22);
-    // avlTree->insert(25);
-    // avlTree->insert(17);
+    avlTree->insert(10);
+    avlTree->insert(7);
+    avlTree->insert(3);
+    avlTree->insert(3);
+    avlTree->insert(5);
+    avlTree->insert(4);
+    avlTree->insert(4);
+    avlTree->insert(2);
+    avlTree->insert(12);
+    avlTree->insert(16);
+    avlTree->insert(13);
+    avlTree->insert(19);
+    avlTree->insert(22);
+    avlTree->insert(25);
+    avlTree->insert(17);
+
+    avlTree->remove(22);
+    avlTree->remove(19);
+    avlTree->remove(3);
+    avlTree->remove(6);
+    avlTree->remove(7);
+    avlTree->remove(12);
 
     avlTree->print();
     avlTree->levelPrint();
+    
 
     // std::cout<<"Search starts"<<std::endl;
 

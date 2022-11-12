@@ -102,15 +102,14 @@ void AvlTree :: insert(int key) {
         pathStack.pop();
 
         updateHeights(cur);
-        int balanceFactor = this->getBalanceFactor(cur);
 
+        int balanceFactor = this->getBalanceFactor(cur);
         if(balanceFactor == 0) {
             break;
         }
         else if(balanceFactor == 2 || balanceFactor == -2) {
             RotationType rotationType = this->getRotationType(balanceFactor, cur);
             this->rotateTree(rotationType, cur);
-
             this->updateParent(cur, pathStack, direction);
             
             break;
@@ -121,8 +120,12 @@ void AvlTree :: insert(int key) {
 }
 
 void AvlTree :: updateHeights(TreeNode* temp) {
-    temp->setLeftHeight(temp->getLeft()->getHeight());
-    temp->setRightHeight(temp->getRight()->getHeight());
+    if(temp->getLeft()) {
+        temp->setLeftHeight(temp->getLeft()->getHeight());
+    }
+    if(temp->getRight()) {
+        temp->setRightHeight(temp->getRight()->getHeight());
+    }
 }
 
 int AvlTree :: getBalanceFactor(TreeNode* temp) {
@@ -134,37 +137,45 @@ RotationType AvlTree :: getRotationType(int balanceFactor, TreeNode* cur) {
         TreeNode* left = cur->getLeft();
 
         if(left->getLeftHeight() > left->getRightHeight()) {
+            std::cout<<"LL rotation to be done"<<std::endl;
             return LL;
         }
 
+        std::cout<<"LR rotation to be done"<<std::endl;
         return LR;
     }
 
     TreeNode* right = cur->getRight();
 
     if(right->getRightHeight() > right->getLeftHeight()) {
+        std::cout<<"RR rotation to be done"<<std::endl;
         return RR;
     }
 
+    std::cout<<"RL rotation to be done"<<std::endl;
     return RL;
 }
 
 void AvlTree :: rotateTree(RotationType rotationType, TreeNode* cur) {
     switch(rotationType) {
         case LL: 
+            std::cout<<"Performing LL rotation"<<std::endl;
             llRotation(cur, cur->getLeft(), cur->getLeft()->getLeft());
             break;
 
         case RR:
+            std::cout<<"Performing RR rotation"<<std::endl;
             rrRotation(cur, cur->getRight(), cur->getRight()->getRight());
             break;
 
         case LR:
+            std::cout<<"Performing LR rotation"<<std::endl;
             rrRotation(cur->getLeft(), cur->getLeft()->getRight(), cur->getLeft()->getRight()->getRight());
             llRotation(cur, cur->getLeft(), cur->getLeft());
             break;
 
         case RL:
+            std::cout<<"Performing RL rotation"<<std::endl;
             llRotation(cur->getRight(), cur->getRight()->getLeft(), cur->getRight()->getLeft()->getLeft());
             rrRotation(cur, cur->getRight(), cur->getRight());
             break;

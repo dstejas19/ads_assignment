@@ -53,11 +53,11 @@ int main()
     avlTree->insert(12);
     avlTree->insert(16);
     avlTree->insert(13);
-    avlTree->insert(14);
     avlTree->insert(19);
     avlTree->insert(22);
     avlTree->insert(25);
     avlTree->insert(17);
+    avlTree->insert(14);
 
     // avlTree->remove(22);
     avlTree->remove(17); //LR

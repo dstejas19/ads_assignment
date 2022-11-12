@@ -3,10 +3,18 @@
 // Driver Code
 
 void print(const Key* key) {
+    if(!key) {
+        std::cout<<"Not present"<<std::endl;
+        return;
+    }
     std::cout<<key->data<<std::endl;
 }
 
 void print(const std::vector<const Key*> keys) {
+    if(keys.empty()) {
+        std::cout<<"Not present"<<std::endl;
+        return;
+    }
     for(auto &a:keys) {
         std::cout<<a->data<<std::endl;
     }

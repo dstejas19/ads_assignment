@@ -39,6 +39,9 @@ int main()
     avlTree->remove(7);
     avlTree->remove(5);
 
+    avlTree->print();
+    avlTree->levelPrint();
+
     avlTree->insert(10);
     avlTree->insert(7);
     avlTree->insert(3);

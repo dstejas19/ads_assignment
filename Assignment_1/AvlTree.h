@@ -1,31 +1,19 @@
 #define AVLTREE_H
 
-#include "TreeNode.h"
-#include "RotationType.h"
-#include "Direction.h"
+#include "AvlTreeHelper.h"
 
-#include <stack>
 #include <vector>
 #include <queue>
-#include <iostream>
 
 class AvlTree {
 private:
     TreeNode* root;
-
-    std::stack<std::pair<TreeNode*, Direction> > getPathStack(int insertKey);
-    void updateHeights(TreeNode* temp);
-    int getBalanceFactor(TreeNode* temp);
-    RotationType getRotationType(int balanceFactor, TreeNode* cur);
-    TreeNode* rotateTree(RotationType, TreeNode* cur);
+    AvlTreeHelper* avlTreeHelper;
+    
     void updateParent(TreeNode* cur, std::stack<std::pair<TreeNode*, Direction> >& pathStack, Direction direction);
-    void llRotation(TreeNode* gp, TreeNode* pp, TreeNode* p);
-    void rrRotation(TreeNode* gp, TreeNode* pp, TreeNode* p);
-    void dfs(TreeNode* cur);
-    bool isLeafNode(TreeNode* cur);
 
 public:
-    AvlTree();
+    AvlTree(AvlTreeHelper* avlTreeHelper);
     ~AvlTree();
 
     void insert(int key);

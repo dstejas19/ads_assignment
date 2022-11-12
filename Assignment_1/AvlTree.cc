@@ -189,9 +189,13 @@ TreeNode* AvlTree :: rotateTree(RotationType rotationType, TreeNode* cur) {
 
         case LR:
             newCur = cur->getLeft()->getRight();
+            TreeNode* gp = cur;
+            TreeNode* pp = cur->getLeft();
+            TreeNode* p = cur->getLeft()->getRight();
+            TreeNode* n = cur->getLeft()->getRight()->getRight();
             std::cout<<"Performing LR rotation"<<std::endl;
             rrRotation(cur->getLeft(), cur->getLeft()->getRight(), cur->getLeft()->getRight()->getRight());
-            llRotation(cur, cur->getLeft(), cur->getLeft());
+            llRotation(cur, cur->getLeft(), cur->getLeft()->getLeft());
 
             break;
 
@@ -199,7 +203,7 @@ TreeNode* AvlTree :: rotateTree(RotationType rotationType, TreeNode* cur) {
             newCur = cur->getRight()->getLeft();
             std::cout<<"Performing RL rotation"<<std::endl;
             llRotation(cur->getRight(), cur->getRight()->getLeft(), cur->getRight()->getLeft()->getLeft());
-            rrRotation(cur, cur->getRight(), cur->getRight());
+            rrRotation(cur, cur->getRight(), cur->getRight()->getRight());
 
             break;
     }
@@ -272,8 +276,9 @@ void AvlTree :: levelPrint() {
             }
 
             std::cout<<"Left height is "<<temp->getLeftHeight()<<" and Right height is "<<temp->getRightHeight()<<" and height is "<<temp->getHeight()<<std::endl;
-            ++level;
         }
+
+        ++level;
     }
 }
 

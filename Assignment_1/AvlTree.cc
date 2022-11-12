@@ -161,34 +161,41 @@ RotationType AvlTree :: getRotationType(int balanceFactor, TreeNode* cur) {
 }
 
 TreeNode* AvlTree :: rotateTree(RotationType rotationType, TreeNode* cur) {
+    TreeNode* newCur;
+
     switch(rotationType) {
         case LL: 
+            newCur = cur->getLeft();
             std::cout<<"Performing LL rotation"<<std::endl;
             llRotation(cur, cur->getLeft(), cur->getLeft()->getLeft());
 
-            return cur->getLeft();
+            break;
 
         case RR:
+            newCur = cur->getRight();
             std::cout<<"Performing RR rotation"<<std::endl;
             rrRotation(cur, cur->getRight(), cur->getRight()->getRight());
-            return cur->getRight();
+
+            break;
 
         case LR:
+            newCur = cur->getLeft()->getRight();
             std::cout<<"Performing LR rotation"<<std::endl;
             rrRotation(cur->getLeft(), cur->getLeft()->getRight(), cur->getLeft()->getRight()->getRight());
             llRotation(cur, cur->getLeft(), cur->getLeft());
 
-            return cur->getLeft();
+            break;
 
         case RL:
+            newCur = cur->getRight()->getLeft();
             std::cout<<"Performing RL rotation"<<std::endl;
             llRotation(cur->getRight(), cur->getRight()->getLeft(), cur->getRight()->getLeft()->getLeft());
             rrRotation(cur, cur->getRight(), cur->getRight());
 
-            return cur->getRight();
+            break;
     }
 
-    return nullptr;
+    return newCur;
 }
 
 void AvlTree :: llRotation(TreeNode* gp, TreeNode* pp, TreeNode* p) {

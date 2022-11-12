@@ -61,7 +61,8 @@ int main()
 
     // avlTree->remove(22);
     avlTree->remove(17); //LR
-    avlTree->remove(3); //RR
+    avlTree->remove(3); 
+    avlTree->remove(2); //RR
     avlTree->remove(22);
     avlTree->remove(25); //LL
     avlTree->remove(13); //RL

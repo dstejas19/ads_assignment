@@ -12,6 +12,7 @@ const Key* AvlTree :: search(int key) {
     std::stack<TreeNode*> s;
     TreeNode* cur = this->root;
     TreeNode* prev;
+    int count = 0;
 
     while(cur || !s.empty()) {
         do {
@@ -19,6 +20,7 @@ const Key* AvlTree :: search(int key) {
                 break;
             }
             s.push(cur);
+            ++count;
 
             prev = cur;
             cur = cur->getLeft();
@@ -28,6 +30,7 @@ const Key* AvlTree :: search(int key) {
         s.pop();
 
         if(cur->getData()->data == key) {
+            std::cout<<"The count for "<<key<<" is "<<count<<std::endl;
             return cur->getData();
         }
         else if(cur->getData()->data < key) {

@@ -325,6 +325,12 @@ std::stack<std::pair<TreeNode*, Direction> > AvlTree :: getPathStack(int insertK
         }
         else if(key < insertKey) {
             cur = cur->getRight();
+
+            // if degree is one, insert here and return
+            if(!cur) {
+                return pathStack;
+            }
+
             direction = R;
         }
     }

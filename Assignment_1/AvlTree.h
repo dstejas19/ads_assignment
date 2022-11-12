@@ -6,6 +6,7 @@
 
 #include <stack>
 #include <vector>
+#include <queue>
 #include <iostream>
 
 class AvlTree {
@@ -33,4 +34,5 @@ public:
     const std::vector<const Key*> search(int low, int high);
 
     void print();
+    void levelPrint();
 };

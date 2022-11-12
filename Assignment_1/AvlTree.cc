@@ -121,7 +121,8 @@ void AvlTree :: insert(int key) {
 
     std::cout<<"Inserted "<<key<<" to the tree"<<std::endl;
     std::cout<<"Printing"<<std::endl;
-    this->print();
+    std::cout<<"---------"<<std::endl;
+    this->levelPrint();
     std::cout<<"---------"<<std::endl;
 }
 
@@ -233,6 +234,40 @@ void AvlTree :: updateParent(TreeNode* cur, std::stack<std::pair<TreeNode*, Dire
 
 void AvlTree :: print() {
     dfs(root);
+}
+
+void AvlTree :: levelPrint() {
+    std::queue<TreeNode*> q;
+    int level = 0;
+
+    q.push(this->root);
+
+    while(!q.empty()) {
+        int size = q.size();
+
+        std::cout<<"Level "<<level<<std::endl;
+
+        for(int i=0;i<size;i++) {
+            TreeNode* temp = q.front();
+            q.pop();
+
+            std::cout<<"The key is "<<temp->getData()->data<<std::endl;
+            std::cout<<"It's children are "<<std::endl;
+            if(temp->getLeft()) {
+                std::cout<<"Left child "<<temp->getLeft()->getData()->data<<std::endl;
+
+                q.push(temp->getLeft());
+            }
+
+            if(temp->getRight()) {
+                std::cout<<"Right child "<<temp->getRight()->getData()->data<<std::endl;
+
+                q.push(temp->getRight());
+            }
+
+            std::cout<<"Left height is "<<temp->getLeftHeight()<<" and Right height is "<<temp->getRightHeight()<<" and height is "<<temp->getHeight()<<std::endl;
+        }
+    }
 }
 
 void AvlTree :: dfs(TreeNode* cur) {

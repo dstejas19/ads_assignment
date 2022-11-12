@@ -56,6 +56,7 @@ int main()
     // avlTree->insert(17);
 
     avlTree->print();
+    avlTree->levelPrint();
 
     // std::cout<<"Search starts"<<std::endl;
 

@@ -108,6 +108,7 @@ void AvlTree :: insert(int key) {
             break;
         }
         else if(balanceFactor == 2 || balanceFactor == -2) {
+            std::cout<<"Balancing has to be done"<<std::endl;
             RotationType rotationType = this->getRotationType(balanceFactor, cur);
             this->rotateTree(rotationType, cur);
             this->updateParent(cur, pathStack, direction);

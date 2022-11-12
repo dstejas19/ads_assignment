@@ -5,6 +5,8 @@ int main()
 {
     AvlTree *avlTree = new AvlTree();
 
+    std::cout<<"New Tree Initialized"<<std::endl;
+
     avlTree->insert(1);
     avlTree->insert(3);
     avlTree->insert(7);

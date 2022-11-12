@@ -33,6 +33,9 @@ const Key* AvlTree :: search(int key) {
         else if(cur->getData()->data < key) {
             cur = cur->getRight();
         }
+        else {
+            cur = nullptr;
+        }
     }
 
     return nullptr;
@@ -66,6 +69,9 @@ const std::vector<const Key*> AvlTree :: search(int low, int high) {
 
         if(key < high) {
             cur = cur->getRight();
+        }
+        else {
+            cur = nullptr;
         }
     }
 

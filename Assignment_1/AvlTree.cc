@@ -191,11 +191,11 @@ void AvlTree :: llRotation(TreeNode* gp, TreeNode* pp, TreeNode* p) {
 }
 
 void AvlTree :: rrRotation(TreeNode* gp, TreeNode* pp, TreeNode* p) {
-    std::cout<<"coming here"<<std::endl;
     TreeNode* b = pp->getLeft();
 
     gp->setRight(b);
-    p->setLeft(gp);
+    pp->setLeft(gp);
+    std::cout<<"RR rotation done"<<std::endl;
 }
 
 void AvlTree :: updateParent(TreeNode* cur, std::stack<std::pair<TreeNode*, Direction> >& pathStack, Direction direction) {

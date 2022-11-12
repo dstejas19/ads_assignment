@@ -130,8 +130,14 @@ void AvlTree :: updateHeights(TreeNode* temp) {
     if(temp->getLeft()) {
         temp->setLeftHeight(temp->getLeft()->getHeight() + 1);
     }
+    else {
+        temp->setLeftHeight(0);
+    }
     if(temp->getRight()) {
         temp->setRightHeight(temp->getRight()->getHeight() + 1);
+    }
+    else {
+        temp->setRightHeight(0);
     }
 }
 

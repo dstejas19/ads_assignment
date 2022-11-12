@@ -54,11 +54,17 @@ void TreeNode :: setLeft(TreeNode* _left) {
     if(_left) {
         this->leftHeight = _left->getLeftHeight() + 1;
     }
+    else {
+        this->leftHeight = 0;
+    }
 }
 
 void TreeNode :: setRight(TreeNode* _right) {
     this->right = _right;
     if(_right) {
         this->rightHeight = _right->getRightHeight() + 1;
+    }
+    else {
+        this->rightHeight = 0;
     }
 }

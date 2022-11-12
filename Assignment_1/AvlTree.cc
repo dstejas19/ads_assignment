@@ -71,6 +71,7 @@ const std::vector<const Key*> AvlTree :: search(int low, int high) {
 }
 
 void AvlTree :: insert(int key) {
+    std::cout<<"Inserting "<<key<<" into the tree"<<std::endl;
     std::stack<std::pair<TreeNode*, Direction> > pathStack = this->getPathStack(key);
 
     TreeNode* temp = new TreeNode(new Key(key), nullptr, nullptr);
@@ -88,11 +89,12 @@ void AvlTree :: insert(int key) {
         return;
     }
     else if(leafValue > key) {
-        pathStack.top().first->setRight(temp);
-    }
-    else {
         pathStack.top().first->setLeft(temp);
     }
+    else {
+        pathStack.top().first->setRight(temp);
+    }
+    pathStack.pop();
 
     while(!pathStack.empty()) {
         TreeNode* cur = pathStack.top().first;

@@ -6,11 +6,14 @@ ifdef linux
 tag = -n
 endif
 
-main: AvlTree.o TreeNode.o main.o
+main: AvlTreeHelper.o AvlTree.o TreeNode.o main.o
 	$(CC) -o main AvlTree.o TreeNode.o main.o -lfl
 
 main.o: main.cc
 	$(CC) -g -c main.cc
+
+AvlTreeHelper.o: AvlTreeHelper.cc
+	$(CC) -g -c AvlTreeHelper.cc
 
 AvlTree.o: AvlTree.cc
 	$(CC) -g -c AvlTree.cc

@@ -189,10 +189,6 @@ TreeNode* AvlTree :: rotateTree(RotationType rotationType, TreeNode* cur) {
 
         case LR:
             newCur = cur->getLeft()->getRight();
-            TreeNode* gp = cur;
-            TreeNode* pp = cur->getLeft();
-            TreeNode* p = cur->getLeft()->getRight();
-            TreeNode* n = cur->getLeft()->getRight()->getRight();
             std::cout<<"Performing LR rotation"<<std::endl;
             rrRotation(cur->getLeft(), cur->getLeft()->getRight(), cur->getLeft()->getRight()->getRight());
             llRotation(cur, cur->getLeft(), cur->getLeft()->getLeft());

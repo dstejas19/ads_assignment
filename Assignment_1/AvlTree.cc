@@ -108,7 +108,7 @@ void AvlTree :: insert(int key) {
             break;
         }
         else if(balanceFactor == 2 || balanceFactor == -2) {
-            std::cout<<"Balancing has to be done"<<std::endl;
+            std::cout<<"Balancing has to be done. The balance factor is "<<balanceFactor<<std::endl;
             RotationType rotationType = this->getRotationType(balanceFactor, cur);
             this->rotateTree(rotationType, cur);
             this->updateParent(cur, pathStack, direction);
@@ -118,6 +118,9 @@ void AvlTree :: insert(int key) {
     }
 
     std::cout<<"Inserted "<<key<<" to the tree"<<std::endl;
+    std::cout<<"Printing"<<std::endl;
+    this->print();
+    std::cout<<"---------"<<std::endl;
 }
 
 void AvlTree :: updateHeights(TreeNode* temp) {
@@ -188,6 +191,7 @@ void AvlTree :: llRotation(TreeNode* gp, TreeNode* pp, TreeNode* p) {
 
     gp->setLeft(c);
     pp->setRight(gp);
+    std::cout<<"LL rotation done"<<std::endl;
 }
 
 void AvlTree :: rrRotation(TreeNode* gp, TreeNode* pp, TreeNode* p) {

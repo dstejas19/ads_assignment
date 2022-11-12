@@ -51,10 +51,14 @@ void TreeNode :: setRightHeight(int _rightHeight) {
 
 void TreeNode :: setLeft(TreeNode* _left) {
     this->left = _left;
-    this->leftHeight = _left->getLeftHeight() + 1;
+    if(_left) {
+        this->leftHeight = _left->getLeftHeight() + 1;
+    }
 }
 
 void TreeNode :: setRight(TreeNode* _right) {
     this->right = _right;
-    this->rightHeight = _right->getRightHeight() + 1;
+    if(_right) {
+        this->rightHeight = _right->getRightHeight() + 1;
+    }
 }

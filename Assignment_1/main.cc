@@ -33,6 +33,8 @@ int main()
 
     avlTree->print();
 
+    std::cout<<"Search starts"<<std::endl;
+
     std::cout<<avlTree->search(5)->data<<std::endl;
 
     const std::vector<const Key*> keys = avlTree->search(10, 23);

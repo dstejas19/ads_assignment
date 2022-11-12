@@ -18,7 +18,9 @@ int main()
     avlTree->insert(10);
     avlTree->insert(7);
     avlTree->insert(3);
+    avlTree->insert(3);
     avlTree->insert(5);
+    avlTree->insert(4);
     avlTree->insert(4);
     avlTree->insert(2);
     avlTree->insert(12);
@@ -30,6 +32,14 @@ int main()
     avlTree->insert(17);
 
     avlTree->print();
+
+    std::cout<<avlTree->search(5)->data<<std::endl;
+
+    const std::vector<const Key*> keys = avlTree->search(10, 23);
+
+    for(auto &a:keys) {
+        std::cout<<a->data<<std::endl;
+    }
 
     return 0;
 }

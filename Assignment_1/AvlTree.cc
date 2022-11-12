@@ -11,14 +11,17 @@ AvlTree :: ~AvlTree()  {
 const Key* AvlTree :: search(int key) {
     std::stack<TreeNode*> s;
     TreeNode* cur = this->root;
+    TreeNode* prev;
 
     s.push(cur);
 
     while(cur || !s.empty()) {
-        while(cur) {
+        do {
             s.push(cur);
+
+            prev = cur;
             cur = cur->getLeft();
-        }
+        } while(cur && prev->getData()->data >= key);
 
         cur = s.top();
         s.pop();
@@ -26,8 +29,9 @@ const Key* AvlTree :: search(int key) {
         if(cur->getData()->data == key) {
             return cur->getData();
         }
-
-        cur = cur->getRight();
+        else if(cur->getData()->data < key) {
+            cur = cur->getRight();
+        }
     }
 
     return nullptr;
@@ -37,14 +41,17 @@ const std::vector<const Key*> AvlTree :: search(int low, int high) {
     std::vector<const Key*> keys;
     std::stack<TreeNode*> s;
     TreeNode* cur = this->root;
+    TreeNode* prev;
 
     s.push(cur);
 
     while(cur || !s.empty()) {
-        while(cur && cur->getData()->data >= low) {
+        do {
             s.push(cur);
+            
+            prev = cur;
             cur = cur->getLeft();
-        }
+        } while(cur && prev->getData()->data >= low);
 
         cur = s.top();
         s.pop();
@@ -64,7 +71,7 @@ const std::vector<const Key*> AvlTree :: search(int low, int high) {
 }
 
 void AvlTree :: insert(int key) {
-    std::stack<std::pair<TreeNode*, Direction> > pathStack = this->getPathStack();
+    std::stack<std::pair<TreeNode*, Direction> > pathStack = this->getPathStack(key);
 
     TreeNode* temp = new TreeNode(new Key(key), nullptr, nullptr);
 
@@ -87,6 +94,7 @@ void AvlTree :: insert(int key) {
 
     while(!pathStack.empty()) {
         TreeNode* cur = pathStack.top().first;
+        Direction direction = pathStack.top().second;
         pathStack.pop();
 
         updateHeights(cur);
@@ -99,7 +107,7 @@ void AvlTree :: insert(int key) {
             RotationType rotationType = this->getRotationType(balanceFactor, cur);
             this->rotateTree(rotationType, cur);
 
-            this->updateParent(cur, pathStack);
+            this->updateParent(cur, pathStack, direction);
             
             return;
         }
@@ -171,14 +179,14 @@ void AvlTree :: rrRotation(TreeNode* gp, TreeNode* pp, TreeNode* p) {
     p->setLeft(gp);
 }
 
-void AvlTree :: updateParent(TreeNode* cur, std::stack<std::pair<TreeNode*, Direction> >& pathStack) {
+void AvlTree :: updateParent(TreeNode* cur, std::stack<std::pair<TreeNode*, Direction> >& pathStack, Direction direction) {
     if(pathStack.empty()) {
         this->root = cur;
 
         return;
     }
 
-    if(pathStack.top().second == L) {
+    if(direction == L) {
         pathStack.top().first->setLeft(cur);
     }
     else {
@@ -198,4 +206,37 @@ void AvlTree :: dfs(TreeNode* cur) {
     dfs(cur->getLeft());
     std::cout<<cur->getData()->data<<std::endl;
     dfs(cur->getRight());
+}
+
+std::stack<std::pair<TreeNode*, Direction> > AvlTree :: getPathStack(int insertKey) {
+    TreeNode* cur = this->root;
+    TreeNode* prev;
+    std::stack<std::pair<TreeNode*, Direction> > pathStack;
+    Direction direction = N;
+
+    while(cur || !pathStack.empty()) {
+        do {
+            pathStack.push({cur, direction});
+            direction = L;
+
+            prev = cur;
+            cur = cur->getLeft();
+        } while(cur && prev->getData()->data >= insertKey);
+
+        cur = pathStack.top().first;
+
+        int key = cur->getData()->data;
+
+        if(key == insertKey || this->isLeafNode(cur)) {
+            return pathStack;
+        }
+        else if(key < insertKey) {
+            cur = cur->getRight();
+            direction = R;
+        }
+    }
+}
+
+bool AvlTree :: isLeafNode(TreeNode* cur) {
+    return !cur->getLeft() && !cur->getRight();
 }

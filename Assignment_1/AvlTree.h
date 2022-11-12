@@ -12,15 +12,16 @@ class AvlTree {
 private:
     TreeNode* root;
 
-    std::stack<std::pair<TreeNode*, Direction> > getPathStack();
+    std::stack<std::pair<TreeNode*, Direction> > getPathStack(int insertKey);
     void updateHeights(TreeNode* temp);
     int getBalanceFactor(TreeNode* temp);
     RotationType getRotationType(int balanceFactor, TreeNode* cur);
     void rotateTree(RotationType, TreeNode* cur);
-    void updateParent(TreeNode* cur, std::stack<std::pair<TreeNode*, Direction> >& pathStack);
+    void updateParent(TreeNode* cur, std::stack<std::pair<TreeNode*, Direction> >& pathStack, Direction direction);
     void llRotation(TreeNode* gp, TreeNode* pp, TreeNode* p);
     void rrRotation(TreeNode* gp, TreeNode* pp, TreeNode* p);
     void dfs(TreeNode* cur);
+    bool isLeafNode(TreeNode* cur);
 
 public:
     AvlTree();

@@ -13,10 +13,11 @@ const Key* AvlTree :: search(int key) {
     TreeNode* cur = this->root;
     TreeNode* prev;
 
-    s.push(cur);
-
     while(cur || !s.empty()) {
         do {
+            if(!cur) {
+                break;
+            }
             s.push(cur);
 
             prev = cur;
@@ -43,10 +44,11 @@ const std::vector<const Key*> AvlTree :: search(int low, int high) {
     TreeNode* cur = this->root;
     TreeNode* prev;
 
-    s.push(cur);
-
     while(cur || !s.empty()) {
         do {
+            if(!cur) {
+                break;
+            }
             s.push(cur);
 
             prev = cur;

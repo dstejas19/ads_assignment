@@ -50,7 +50,7 @@ int main()
     avlTree->insert(25);
     avlTree->insert(17);
 
-    avlTree->print();
+    // avlTree->print();
 
     std::cout<<"Search starts"<<std::endl;
 
@@ -58,10 +58,27 @@ int main()
     print(avlTree->search(-3));
     print(avlTree->search(100));
     print(avlTree->search(8));
+    print(avlTree->search(10));
+    print(avlTree->search(7));
+    print(avlTree->search(3));
+    print(avlTree->search(5));
+    print(avlTree->search(4));
+    print(avlTree->search(2));
+    print(avlTree->search(12));
+    print(avlTree->search(16));
+    print(avlTree->search(13));
+    print(avlTree->search(19));
+    print(avlTree->search(22));
+    print(avlTree->search(25));
+    print(avlTree->search(17));
 
     std::cout<<"Search with bounds starts"<<std::endl;
 
     print(avlTree->search(10, 23));
+
+    print(avlTree->search(2, 25));
+
+    print(avlTree->search(5, 17));
 
     print(avlTree->search(-5, 1));
 

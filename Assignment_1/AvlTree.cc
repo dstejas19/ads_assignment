@@ -21,7 +21,7 @@ const Key* AvlTree :: search(int key) {
 
             prev = cur;
             cur = cur->getLeft();
-        } while(cur && prev->getData()->data >= key);
+        } while(cur && prev->getData()->data > key);
 
         cur = s.top();
         s.pop();
@@ -51,7 +51,7 @@ const std::vector<const Key*> AvlTree :: search(int low, int high) {
 
             prev = cur;
             cur = cur->getLeft();
-        } while(cur && prev->getData()->data >= low);
+        } while(cur && prev->getData()->data > low);
 
         cur = s.top();
         s.pop();
@@ -62,7 +62,7 @@ const std::vector<const Key*> AvlTree :: search(int low, int high) {
             keys.push_back(cur->getData());
         }
 
-        if(key <= high) {
+        if(key < high) {
             cur = cur->getRight();
         }
     }
@@ -314,7 +314,7 @@ std::stack<std::pair<TreeNode*, Direction> > AvlTree :: getPathStack(int insertK
 
             prev = cur;
             cur = cur->getLeft();
-        } while(cur && prev->getData()->data >= insertKey);
+        } while(cur && prev->getData()->data > insertKey);
 
         cur = pathStack.top().first;
 

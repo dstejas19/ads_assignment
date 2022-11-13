@@ -1,4 +1,4 @@
-#include "AvlTree.h"
+#include "AvlTreeImpl.h"
  
 // Driver Code
 
@@ -23,7 +23,7 @@ void print(const std::vector<const Key*> keys) {
 int main()
 {
     AvlTreeHelper *avlTreeHelper = new AvlTreeHelper();
-    AvlTree *avlTree = new AvlTree(avlTreeHelper);
+    AvlTreeImpl *avlTree = new AvlTreeImpl(avlTreeHelper);
 
     std::cout<<"New Tree Initialized"<<std::endl;
 

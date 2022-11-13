@@ -1,14 +1,14 @@
-#include "AvlTree.h"
+#include "AvlTreeImpl.h"
 
-AvlTree :: AvlTree(AvlTreeHelper* avlTreeHelper)  {
+AvlTreeImpl :: AvlTreeImpl(AvlTreeHelper* avlTreeHelper)  {
     this->avlTreeHelper = avlTreeHelper;
 }
 
-AvlTree :: ~AvlTree()  {
+AvlTreeImpl :: ~AvlTreeImpl()  {
     delete root;
 }
 
-const Key* AvlTree :: search(int key) {
+const Key* AvlTreeImpl :: search(int key) {
     std::stack<TreeNode*> s;
     TreeNode* cur = this->root;
     TreeNode* prev;
@@ -44,7 +44,7 @@ const Key* AvlTree :: search(int key) {
     return nullptr;
 }
 
-const std::vector<const Key*> AvlTree :: search(int low, int high) {
+const std::vector<const Key*> AvlTreeImpl :: search(int low, int high) {
     std::vector<const Key*> keys;
     std::stack<TreeNode*> s;
     TreeNode* cur = this->root;
@@ -81,7 +81,7 @@ const std::vector<const Key*> AvlTree :: search(int low, int high) {
     return keys;
 }
 
-void AvlTree :: insert(int key) {
+void AvlTreeImpl :: insert(int key) {
     std::cout<<"Inserting "<<key<<" into the tree"<<std::endl;
     std::stack<std::pair<TreeNode*, Direction> > pathStack = this->avlTreeHelper->getPathStack(this->root, key);
 
@@ -137,7 +137,7 @@ void AvlTree :: insert(int key) {
     std::cout<<"---------"<<std::endl;
 }
 
-void AvlTree :: remove(int key) {
+void AvlTreeImpl :: remove(int key) {
     std::cout<<"Deleting "<<key<<" from the tree"<<std::endl;
     std::stack<std::pair<TreeNode*, Direction> > pathStack = this->avlTreeHelper->getPathStack(this->root, key);
 
@@ -196,7 +196,7 @@ void AvlTree :: remove(int key) {
     std::cout<<"Deleted "<<key<<" from the tree"<<std::endl;
 }
 
-void AvlTree :: updateParent(TreeNode* cur, std::stack<std::pair<TreeNode*, Direction> >& pathStack, Direction direction) {
+void AvlTreeImpl :: updateParent(TreeNode* cur, std::stack<std::pair<TreeNode*, Direction> >& pathStack, Direction direction) {
     if(pathStack.empty()) {
         this->root = cur;
 
@@ -211,10 +211,10 @@ void AvlTree :: updateParent(TreeNode* cur, std::stack<std::pair<TreeNode*, Dire
     }
 }
 
-void AvlTree :: print() {
+void AvlTreeImpl :: print() {
     this->avlTreeHelper->dfs(this->root);
 }
 
-void AvlTree :: levelPrint() {
+void AvlTreeImpl :: levelPrint() {
     this->avlTreeHelper->levelPrint(this->root);
 }

@@ -1,11 +1,11 @@
-#define AVLTREE_H
+#define AVLTREEIMPL_H
 
 #include "AvlTreeHelper.h"
 
 #include <vector>
 #include <queue>
 
-class AvlTree {
+class AvlTreeImpl {
 private:
     TreeNode* root;
     AvlTreeHelper* avlTreeHelper;
@@ -13,8 +13,8 @@ private:
     void updateParent(TreeNode* cur, std::stack<std::pair<TreeNode*, Direction> >& pathStack, Direction direction);
 
 public:
-    AvlTree(AvlTreeHelper* avlTreeHelper);
-    ~AvlTree();
+    AvlTreeImpl(AvlTreeHelper* avlTreeHelper);
+    ~AvlTreeImpl();
 
     void insert(int key);
     void remove(int key);

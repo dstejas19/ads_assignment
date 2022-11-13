@@ -24,7 +24,7 @@ Commands Utils :: getFunctionName(std::string line) {
 
 std::pair<int, int> Utils :: getParams(Commands command, std::string line) {
     std::pair<int, int> params;
-
+    std::cout<<command<<std::endl;
     if(command == SEARCH_RANGE) {
         std::string temp = "";
 

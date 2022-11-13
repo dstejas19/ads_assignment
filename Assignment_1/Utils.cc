@@ -6,7 +6,7 @@ Commands Utils :: getFunctionName(std::string line) {
     }
 
     if(line[0] == 'I') {
-        if(line[2] == 'I') {
+        if(line[2] == 'i') {
             return INITIALISE;
         }
 

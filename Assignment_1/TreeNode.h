@@ -1,3 +1,4 @@
+#ifndef TREENODE_H
 #define TREENODE_H
 
 #include "Key.h"
@@ -29,3 +30,5 @@ public:
     void setLeft(TreeNode* _left);
     void setRight(TreeNode* _right);
 };
+
+#endif

@@ -1,3 +1,4 @@
+#ifndef AVLTREEIMPL_H
 #define AVLTREEIMPL_H
 
 #include "AvlTreeHelper.h"
@@ -24,3 +25,5 @@ public:
     void print();
     void levelPrint();
 };
+
+#endif

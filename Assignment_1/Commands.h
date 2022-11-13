@@ -1,3 +1,6 @@
+#ifndef COMMANDS_H
 #define COMMANDS_H
 
 enum Commands {INITIALISE, INSERT, DELETE, SEARCH, SEARCH_RANGE};
+
+#endif

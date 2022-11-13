@@ -1,3 +1,4 @@
+#ifndef AVLTREEHELPER_H
 #define AVLTREEHELPER_H
 
 #include "TreeNode.h"
@@ -26,3 +27,5 @@ public:
     void getPrevHighest(std::stack<std::pair<TreeNode*, Direction> >& pathStack);
     void getNextLowest(std::stack<std::pair<TreeNode*, Direction> >& pathStack);
 };
+
+#endif

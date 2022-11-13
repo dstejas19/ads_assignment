@@ -1,3 +1,4 @@
+#ifndef KEY_H
 #define KEY_H
 
 struct Key {
@@ -7,3 +8,5 @@ struct Key {
         this->data = _data;
     }
 };
+
+#endif

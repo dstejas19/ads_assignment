@@ -37,6 +37,9 @@ std::stack<std::pair<TreeNode*, Direction> > AvlTreeHelper :: getPathStack(TreeN
 
             direction = R;
         }
+        else {
+            return pathStack;
+        }
     }
 
     std::cout<<"The path stack is empty"<<std::endl;

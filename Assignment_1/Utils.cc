@@ -30,6 +30,7 @@ std::pair<int, int> Utils :: getParams(Commands command, std::string line) {
 
         for(int i=7;i<line.length()-1;++i) {
             if(line[i] == ',') {
+                std::cout<<temp<<std::endl;
                 params.first = stoi(temp);
                 temp = "";
             }
@@ -37,7 +38,8 @@ std::pair<int, int> Utils :: getParams(Commands command, std::string line) {
                 temp += line[i];
             }
         }
-
+        
+        std::cout<<temp<<std::endl;
         params.second = stoi(temp);
     }
     else if(command != INITIALISE) {
@@ -47,9 +49,8 @@ std::pair<int, int> Utils :: getParams(Commands command, std::string line) {
             temp += line[i];
         }
 
+        std::cout<<temp<<std::endl;
         params.first = stoi(temp);
-
-        return params;
     }
 
     return params;

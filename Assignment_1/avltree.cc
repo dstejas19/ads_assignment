@@ -13,6 +13,7 @@ int main(int argc, char **argv) {
     outputFile.open("output_file.txt");
 
     while(getline(inputFile, line)) {
+        std::cout<<line<<std::endl;
         Commands command = Utils::getFunctionName(line);
         std::pair<int, int> params = Utils::getParams(command, line);
 

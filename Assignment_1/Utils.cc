@@ -70,12 +70,12 @@ void Utils :: writeToFile(std::ofstream &outputFile, const std::vector<const Key
         outputFile<<"Null"<<std::endl;
     }
     else {
-        outputFile<<keys[0]->data;
+        std::string outputString = std::to_string(keys[0]->data);
 
         for(int i=1;i<keys.size();++i) {
-            outputFile<<"," + keys[0]->data;
+            outputString += "," + std::to_string(keys[i]->data);
         }
 
-        outputFile<<std::endl;
+        outputFile<<outputString<<std::endl;
     }
 }

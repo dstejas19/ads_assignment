@@ -23,7 +23,7 @@ void print(const std::vector<const Key*> keys) {
 int main()
 {
     AvlTreeHelper *avlTreeHelper = new AvlTreeHelper();
-    AvlTreeImpl *avlTree = new AvlTreeImpl(avlTreeHelper);
+    AvlTreeImpl *avlTree = AvlTreeImpl::initialise(avlTreeHelper);
 
     std::cout<<"New Tree Initialized"<<std::endl;
 

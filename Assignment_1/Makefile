@@ -12,6 +12,12 @@ avltree: Utils.o AvlTreeHelper.o AvlTreeImpl.o TreeNode.o avltree.o
 avltree.o: avltree.cc
 	$(CC) -g -c avltree.cc
 
+main: Utils.o AvlTreeHelper.o AvlTreeImpl.o TreeNode.o main.o
+	$(CC) -o main Utils.o AvlTreeHelper.o AvlTreeImpl.o TreeNode.o main.o -lfl
+
+main.o: main.cc
+	$(CC) -g -c main.cc
+
 Utils.o: Utils.cc
 	$(CC) -g -c Utils.cc
 

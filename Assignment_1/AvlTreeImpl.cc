@@ -8,6 +8,10 @@ AvlTreeImpl :: ~AvlTreeImpl()  {
     delete root;
 }
 
+AvlTreeImpl* AvlTreeImpl :: initialise(AvlTreeHelper* avlTreeHelper) {
+    return new AvlTreeImpl(avlTreeHelper);
+}
+
 const Key* AvlTreeImpl :: search(int key) {
     std::stack<TreeNode*> s;
     TreeNode* cur = this->root;

@@ -42,33 +42,34 @@ int main()
     // avlTree->print();
     // avlTree->levelPrint();
 
-    avlTree->insert(10);
-    avlTree->insert(7);
-    avlTree->insert(3);
-    avlTree->insert(3);
-    avlTree->insert(5);
-    avlTree->insert(4);
-    avlTree->insert(4);
-    avlTree->insert(2);
-    avlTree->insert(12);
-    avlTree->insert(16);
-    avlTree->insert(13);
-    avlTree->insert(19);
-    avlTree->insert(22);
-    avlTree->insert(25);
-    avlTree->insert(17);
-    avlTree->insert(14);
+    // avlTree->insert(10);
+    // avlTree->insert(7);
+    // avlTree->insert(3);
+    // avlTree->insert(3);
+    // avlTree->insert(5);
+    // avlTree->insert(4);
+    // avlTree->insert(4);
+    // avlTree->insert(2);
+    // avlTree->insert(12);
+    // avlTree->insert(16);
+    // avlTree->insert(13);
+    // avlTree->insert(19);
+    // avlTree->insert(22);
+    // avlTree->insert(25);
+    // avlTree->insert(17);
+    // avlTree->insert(14);
 
+    // // avlTree->remove(22);
+    // avlTree->remove(17); //LR
+    // avlTree->remove(3); 
+    // avlTree->remove(2); //RR
     // avlTree->remove(22);
-    avlTree->remove(17); //LR
-    avlTree->remove(3); 
-    avlTree->remove(2); //RR
-    avlTree->remove(22);
-    avlTree->remove(25); //LL
-    avlTree->remove(13); //RL
+    // avlTree->remove(25); //LL
+    // avlTree->remove(13); //RL
 
-    avlTree->print();
-    avlTree->levelPrint();
+    // avlTree->print();
+    // avlTree->levelPrint();
+    
     
 
     // std::cout<<"Search starts"<<std::endl;
@@ -102,6 +103,28 @@ int main()
     // print(avlTree->search(-5, 1));
 
     // print(avlTree->search(100, 1011));
+
+
+    avlTree->insert(21);
+    avlTree->insert(108);
+    avlTree->insert(5);
+    avlTree->insert(1897);
+    avlTree->insert(4325);
+    avlTree->remove(108);
+    print(avlTree->search(1897));
+    avlTree->insert(102);
+    avlTree->insert(65);
+    avlTree->remove(102);
+    avlTree->remove(21);
+    avlTree->insert(106);
+    avlTree->insert(23);
+    print(avlTree->search(23, 99));
+    avlTree->insert(32);
+    avlTree->insert(220);
+    print(avlTree->search(33));
+    print(avlTree->search(21));
+    avlTree->remove(4325);
+    print(avlTree->search(32));
 
     return 0;
 }

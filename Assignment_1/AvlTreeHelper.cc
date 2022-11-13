@@ -1,5 +1,3 @@
-#define AVLTREEHELPER_H
-
 #include "AvlTreeHelper.h"
 
 AvlTreeHelper :: AvlTreeHelper() {

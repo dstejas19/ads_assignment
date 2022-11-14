@@ -22,8 +22,7 @@ void print(const std::vector<const Key*> keys) {
 
 int main()
 {
-    AvlTreeHelper *avlTreeHelper = new AvlTreeHelper();
-    AvlTreeImpl *avlTree = AvlTreeImpl::initialise(avlTreeHelper);
+    AvlTreeImpl *avlTree = AvlTreeImpl::initialise();
 
     std::cout<<"New Tree Initialized"<<std::endl;
 
@@ -107,24 +106,24 @@ int main()
 
     avlTree->insert(21);
     avlTree->insert(108);
-    avlTree->insert(5);
-    avlTree->insert(1897);
-    avlTree->insert(4325);
-    avlTree->remove(108);
-    print(avlTree->search(1897));
-    avlTree->insert(102);
-    avlTree->insert(65);
-    avlTree->remove(102);
-    avlTree->remove(21);
-    avlTree->insert(106);
-    avlTree->insert(23);
-    print(avlTree->search(23, 99));
-    avlTree->insert(32);
-    avlTree->insert(220);
-    print(avlTree->search(33));
-    print(avlTree->search(21));
-    avlTree->remove(4325);
-    print(avlTree->search(32));
+    // avlTree->insert(5);
+    // avlTree->insert(1897);
+    // avlTree->insert(4325);
+    // avlTree->remove(108);
+    // print(avlTree->search(1897));
+    // avlTree->insert(102);
+    // avlTree->insert(65);
+    // avlTree->remove(102);
+    // avlTree->remove(21);
+    // avlTree->insert(106);
+    // avlTree->insert(23);
+    // print(avlTree->search(23, 99));
+    // avlTree->insert(32);
+    // avlTree->insert(220);
+    // print(avlTree->search(33));
+    // print(avlTree->search(21));
+    // avlTree->remove(4325);
+    print(avlTree->search(5));
 
     return 0;
 }

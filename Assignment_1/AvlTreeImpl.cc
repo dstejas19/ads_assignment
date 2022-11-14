@@ -1,15 +1,16 @@
 #include "AvlTreeImpl.h"
 
-AvlTreeImpl :: AvlTreeImpl(AvlTreeHelper* avlTreeHelper)  {
-    this->avlTreeHelper = avlTreeHelper;
+AvlTreeImpl :: AvlTreeImpl()  {
+    // this->avlTreeHelper = avlTreeHelper;
 }
 
 AvlTreeImpl :: ~AvlTreeImpl()  {
     delete root;
 }
 
-AvlTreeImpl* AvlTreeImpl :: initialise(AvlTreeHelper* avlTreeHelper) {
-    return new AvlTreeImpl(avlTreeHelper);
+AvlTreeImpl* AvlTreeImpl :: initialise() {
+    // AvlTreeHelper* avlTreeHelper = new AvlTreeHelper();
+    return new AvlTreeImpl();
 }
 
 const Key* AvlTreeImpl :: search(int key) {
@@ -87,7 +88,7 @@ const std::vector<const Key*> AvlTreeImpl :: search(int low, int high) {
 
 void AvlTreeImpl :: insert(int key) {
     std::cout<<"Inserting "<<key<<" into the tree"<<std::endl;
-    std::stack<std::pair<TreeNode*, Direction> > pathStack = this->avlTreeHelper->getPathStack(this->root, key);
+    std::stack<std::pair<TreeNode*, Direction> > pathStack = AvlTreeHelper::getPathStack(this->root, key);
 
     TreeNode* temp = new TreeNode(new Key(key), nullptr, nullptr);
 
@@ -118,16 +119,16 @@ void AvlTreeImpl :: insert(int key) {
         Direction direction = pathStack.top().second;
         pathStack.pop();
 
-        avlTreeHelper->updateHeights(cur);
+        AvlTreeHelper::updateHeights(cur);
 
-        int balanceFactor = this->avlTreeHelper->getBalanceFactor(cur);
+        int balanceFactor = AvlTreeHelper::getBalanceFactor(cur);
         if(balanceFactor == 0) {
             break;
         }
         else if(balanceFactor == 2 || balanceFactor == -2) {
             std::cout<<"Balancing has to be done. The balance factor is "<<balanceFactor<<std::endl;
-            RotationType rotationType = this->avlTreeHelper->getRotationType(balanceFactor, cur);
-            cur = this->avlTreeHelper->rotateTree(rotationType, cur);
+            RotationType rotationType = AvlTreeHelper::getRotationType(balanceFactor, cur);
+            cur = AvlTreeHelper::rotateTree(rotationType, cur);
             this->updateParent(cur, pathStack, direction);
             
             break;
@@ -143,7 +144,7 @@ void AvlTreeImpl :: insert(int key) {
 
 void AvlTreeImpl :: remove(int key) {
     std::cout<<"Deleting "<<key<<" from the tree"<<std::endl;
-    std::stack<std::pair<TreeNode*, Direction> > pathStack = this->avlTreeHelper->getPathStack(this->root, key);
+    std::stack<std::pair<TreeNode*, Direction> > pathStack = AvlTreeHelper::getPathStack(this->root, key);
 
     TreeNode* toBeRemoved = pathStack.top().first;
     Direction toBeRemovedDirection = pathStack.top().second;
@@ -154,17 +155,17 @@ void AvlTreeImpl :: remove(int key) {
         return;
     }
 
-    if(avlTreeHelper->isLeafNode(toBeRemoved)) {
+    if(AvlTreeHelper::isLeafNode(toBeRemoved)) {
         pathStack.pop();
         updateParent(nullptr, pathStack, toBeRemovedDirection);
 
         delete toBeRemoved;
     }
     else {
-        avlTreeHelper->getPrevHighest(pathStack);
+        AvlTreeHelper::getPrevHighest(pathStack);
 
         if(pathStack.top().first == toBeRemoved) {
-            avlTreeHelper->getNextLowest(pathStack);
+            AvlTreeHelper::getNextLowest(pathStack);
         }
 
         TreeNode* toBeReplaced = pathStack.top().first;
@@ -183,16 +184,16 @@ void AvlTreeImpl :: remove(int key) {
         Direction direction = pathStack.top().second;
         pathStack.pop();
 
-        avlTreeHelper->updateHeights(cur);
+        AvlTreeHelper::updateHeights(cur);
 
-        int balanceFactor = this->avlTreeHelper->getBalanceFactor(cur);
+        int balanceFactor = AvlTreeHelper::getBalanceFactor(cur);
         if(balanceFactor == 1 || balanceFactor == -1) {
             break;
         }
         else if(balanceFactor == 2 || balanceFactor == -2) {
             std::cout<<"Balancing has to be done. The balance factor is "<<balanceFactor<<std::endl;
-            RotationType rotationType = this->avlTreeHelper->getRotationType(balanceFactor, cur);
-            cur = this->avlTreeHelper->rotateTree(rotationType, cur);
+            RotationType rotationType = AvlTreeHelper::getRotationType(balanceFactor, cur);
+            cur = AvlTreeHelper::rotateTree(rotationType, cur);
             this->updateParent(cur, pathStack, direction);
         }
     }
@@ -216,9 +217,9 @@ void AvlTreeImpl :: updateParent(TreeNode* cur, std::stack<std::pair<TreeNode*, 
 }
 
 void AvlTreeImpl :: print() {
-    this->avlTreeHelper->dfs(this->root);
+    AvlTreeHelper::dfs(this->root);
 }
 
 void AvlTreeImpl :: levelPrint() {
-    this->avlTreeHelper->levelPrint(this->root);
+    AvlTreeHelper::levelPrint(this->root);
 }

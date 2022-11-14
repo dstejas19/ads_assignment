@@ -8,15 +8,15 @@
 class AvlTreeImpl {
 private:
     TreeNode* root;
-    AvlTreeHelper* avlTreeHelper;
+    // AvlTreeHelper* avlTreeHelper;
     
-    AvlTreeImpl(AvlTreeHelper* avlTreeHelper);
+    AvlTreeImpl();
     void updateParent(TreeNode* cur, std::stack<std::pair<TreeNode*, Direction> >& pathStack, Direction direction);
 
 public:
     ~AvlTreeImpl();
 
-    static AvlTreeImpl* initialise(AvlTreeHelper* avlTreeHelper);
+    static AvlTreeImpl* initialise();
     void insert(int key);
     void remove(int key);
     const Key* search(int key);

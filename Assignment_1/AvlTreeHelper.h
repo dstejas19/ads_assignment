@@ -14,18 +14,18 @@ public:
     AvlTreeHelper();
     ~AvlTreeHelper();
 
-    void levelPrint(TreeNode* cur);
-    void dfs(TreeNode* cur);
-    std::stack<std::pair<TreeNode*, Direction> > getPathStack(TreeNode* cur, int insertKey);
-    bool isLeafNode(TreeNode* cur);
-    void llRotation(TreeNode* gp, TreeNode* pp, TreeNode* p);
-    void rrRotation(TreeNode* gp, TreeNode* pp, TreeNode* p);
-    TreeNode* rotateTree(RotationType, TreeNode* cur);
-    void updateHeights(TreeNode* temp);
-    int getBalanceFactor(TreeNode* temp);
-    RotationType getRotationType(int balanceFactor, TreeNode* cur);
-    void getPrevHighest(std::stack<std::pair<TreeNode*, Direction> >& pathStack);
-    void getNextLowest(std::stack<std::pair<TreeNode*, Direction> >& pathStack);
+    static void levelPrint(TreeNode* cur);
+    static void dfs(TreeNode* cur);
+    static std::stack<std::pair<TreeNode*, Direction> > getPathStack(TreeNode* cur, int insertKey);
+    static bool isLeafNode(TreeNode* cur);
+    static void llRotation(TreeNode* gp, TreeNode* pp, TreeNode* p);
+    static void rrRotation(TreeNode* gp, TreeNode* pp, TreeNode* p);
+    static TreeNode* rotateTree(RotationType, TreeNode* cur);
+    static void updateHeights(TreeNode* temp);
+    static int getBalanceFactor(TreeNode* temp);
+    static RotationType getRotationType(int balanceFactor, TreeNode* cur);
+    static void getPrevHighest(std::stack<std::pair<TreeNode*, Direction> >& pathStack);
+    static void getNextLowest(std::stack<std::pair<TreeNode*, Direction> >& pathStack);
 };
 
 #endif

@@ -24,7 +24,7 @@ std::stack<std::pair<TreeNode*, Direction> > AvlTreeHelper :: getPathStack(TreeN
 
         int key = cur->getData()->data;
 
-        if(key == insertKey || this->isLeafNode(cur)) {
+        if(key == insertKey || AvlTreeHelper::isLeafNode(cur)) {
             return pathStack;
         }
         else if(key < insertKey) {

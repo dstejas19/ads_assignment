@@ -6,7 +6,7 @@ int main(int argc, char **argv) {
     std::ifstream inputFile;
     std::ofstream outputFile;
 
-    AvlTreeHelper *avlTreeHelper = new AvlTreeHelper();
+    // AvlTreeHelper *avlTreeHelper = new AvlTreeHelper();
     AvlTreeImpl *avlTreeImpl;
 
     inputFile.open(argv[1]);
@@ -19,7 +19,7 @@ int main(int argc, char **argv) {
 
         switch (command) {
             case INITIALISE:
-                avlTreeImpl = AvlTreeImpl::initialise(avlTreeHelper);
+                avlTreeImpl = AvlTreeImpl::initialise();
                 break;
             
             case INSERT:

@@ -1,9 +1,9 @@
 #ifndef AVLTREEHELPER_H
 #define AVLTREEHELPER_H
 
-#include "Node/TreeNode.h"
-#include "Enums/Direction.h"
-#include "Enums/RotationType.h"
+#include "../Node/TreeNode.h"
+#include "../Enums/Direction.h"
+#include "../Enums/RotationType.h"
 
 #include <stack>
 #include <iostream>

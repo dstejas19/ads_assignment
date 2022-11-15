@@ -1,7 +1,7 @@
 #define UTILS_H
 
-#include "Commands.h"
-#include "Key.h"
+#include "Enums/Commands.h"
+#include "Node/Key.h"
 #include "fstream"
 
 #include <string>

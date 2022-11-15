@@ -1,5 +1,5 @@
-#include "AvlTreeImpl.h"
-#include "Utils.h"
+#include "Tree/AvlTreeImpl.h"
+#include "Utils/Utils.h"
 
 int main(int argc, char **argv) {
     std::string line;

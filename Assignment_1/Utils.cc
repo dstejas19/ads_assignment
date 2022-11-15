@@ -1,36 +1,42 @@
 #include "Utils.h"
 
+// extract function name from the string
 Commands Utils :: getFunctionName(std::string line) {
-    if(line[0] == 'D') {
-        return DELETE;
-    }
+    std::string func = line.substr(0, 6);
 
-    if(line[0] == 'I') {
-        if(line[2] == 'i') {
-            return INITIALISE;
-        }
-
+    if(func == "Insert") {
         return INSERT;
     }
-
-    for(int i=7;i<line.length();++i) {
-        if(line[i] == ',') {
-            return SEARCH_RANGE;
+    else if(func == "Delete") {
+        return DELETE;
+    }
+    else if(func == "Search") {
+        for(int i=7;i<line.length();++i) {
+            if(line[i] == ',') {
+                return SEARCH_RANGE;
+            }
         }
+
+        return SEARCH;    
     }
 
-    return SEARCH;
+    func = line.substr(0, 10);
+    
+    if(func == "Initialize") {
+        return INITIALIZE;
+    }
+
+    return INVALID;
 }
 
+// extract parameters from the string
 std::pair<int, int> Utils :: getParams(Commands command, std::string line) {
     std::pair<int, int> params;
-    std::cout<<command<<std::endl;
     if(command == SEARCH_RANGE) {
         std::string temp = "";
 
         for(int i=7;i<line.length()-1;++i) {
             if(line[i] == ',') {
-                std::cout<<temp<<std::endl;
                 params.first = stoi(temp);
                 temp = "";
             }
@@ -39,17 +45,15 @@ std::pair<int, int> Utils :: getParams(Commands command, std::string line) {
             }
         }
         
-        std::cout<<temp<<std::endl;
         params.second = stoi(temp);
     }
-    else if(command != INITIALISE) {
+    else if(command != INITIALIZE) {
         std::string temp = "";
 
         for(int i=7;i<line.length()-1;++i) {
             temp += line[i];
         }
 
-        std::cout<<temp<<std::endl;
         params.first = stoi(temp);
     }
 

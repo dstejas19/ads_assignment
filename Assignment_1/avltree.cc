@@ -6,7 +6,6 @@ int main(int argc, char **argv) {
     std::ifstream inputFile;
     std::ofstream outputFile;
 
-    // AvlTreeHelper *avlTreeHelper = new AvlTreeHelper();
     AvlTreeImpl *avlTreeImpl;
 
     inputFile.open(argv[1]);
@@ -15,11 +14,17 @@ int main(int argc, char **argv) {
     while(getline(inputFile, line)) {
         std::cout<<line<<std::endl;
         Commands command = Utils::getFunctionName(line);
+
+        if(command == INVALID) {
+            std::cout<<"Invalid Command"<<std::endl;
+            continue;
+        }
+        
         std::pair<int, int> params = Utils::getParams(command, line);
 
         switch (command) {
-            case INITIALISE:
-                avlTreeImpl = AvlTreeImpl::initialise();
+            case INITIALIZE:
+                avlTreeImpl = AvlTreeImpl::initialize();
                 break;
             
             case INSERT:
@@ -39,4 +44,9 @@ int main(int argc, char **argv) {
                 break;
         }
     }
+
+    inputFile.close();
+    outputFile.close();
+
+    return 0;
 }

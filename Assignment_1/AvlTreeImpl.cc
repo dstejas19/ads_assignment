@@ -1,23 +1,22 @@
 #include "AvlTreeImpl.h"
 
 AvlTreeImpl :: AvlTreeImpl()  {
-    // this->avlTreeHelper = avlTreeHelper;
 }
 
 AvlTreeImpl :: ~AvlTreeImpl()  {
     delete root;
 }
 
-AvlTreeImpl* AvlTreeImpl :: initialise() {
-    // AvlTreeHelper* avlTreeHelper = new AvlTreeHelper();
+AvlTreeImpl* AvlTreeImpl :: initialize() {
     return new AvlTreeImpl();
 }
 
+// search for key, return key if present else return null
 const Key* AvlTreeImpl :: search(int key) {
+    std::cout<<"Searching for "<<key<<" in the tree"<<std::endl;
     std::stack<TreeNode*> s;
     TreeNode* cur = this->root;
     TreeNode* prev;
-    int count = 0;
 
     while(cur || !s.empty()) {
         do {
@@ -25,7 +24,6 @@ const Key* AvlTreeImpl :: search(int key) {
                 break;
             }
             s.push(cur);
-            ++count;
 
             prev = cur;
             cur = cur->getLeft();
@@ -35,7 +33,6 @@ const Key* AvlTreeImpl :: search(int key) {
         s.pop();
 
         if(cur->getData()->data == key) {
-            std::cout<<"The count for "<<key<<" is "<<count<<std::endl;
             return cur->getData();
         }
         else if(cur->getData()->data < key) {
@@ -50,6 +47,7 @@ const Key* AvlTreeImpl :: search(int key) {
 }
 
 const std::vector<const Key*> AvlTreeImpl :: search(int low, int high) {
+    std::cout<<"Searching for keys between "<<low<<" and "<<high<<" in the tree"<<std::endl;
     std::vector<const Key*> keys;
     std::stack<TreeNode*> s;
     TreeNode* cur = this->root;
@@ -90,8 +88,10 @@ void AvlTreeImpl :: insert(int key) {
     std::cout<<"Inserting "<<key<<" into the tree"<<std::endl;
     std::stack<std::pair<TreeNode*, Direction> > pathStack = AvlTreeHelper::getPathStack(this->root, key);
 
+    // create a node to insert
     TreeNode* temp = new TreeNode(new Key(key), nullptr, nullptr);
 
+    // empty patchstack denotes empty tree
     if(pathStack.empty()) {
         this->root = temp;
         return;
@@ -99,21 +99,22 @@ void AvlTreeImpl :: insert(int key) {
 
     int leafValue = pathStack.top().first->getData()->data;
 
+    // if it is already present in the tree, delete the newly created node
+    // if the leaf value is greater than key, insert new node to it's left
+    // if the leaf value is greater than key, insert new node to it's right
     if(leafValue == key) {
-        std::cout<<"Key "<<key<<" is already present in the tree"<<std::endl;
         delete temp;
         return;
     }
     else if(leafValue > key) {
-        std::cout<<"Inserting "<<key<<" to left of "<<leafValue<<std::endl;
         pathStack.top().first->setLeft(temp);
     }
     else {
-        std::cout<<"Inserting "<<key<<" to right of "<<leafValue<<std::endl;
         pathStack.top().first->setRight(temp);
     }
     pathStack.pop();
 
+    //keep going up the root, update the heights and make sure balance factor lies between -1 and 1, otherwise rotate and break. If balance factor is 0, break from loop
     while(!pathStack.empty()) {
         TreeNode* cur = pathStack.top().first;
         Direction direction = pathStack.top().second;
@@ -126,7 +127,7 @@ void AvlTreeImpl :: insert(int key) {
             break;
         }
         else if(balanceFactor == 2 || balanceFactor == -2) {
-            std::cout<<"Balancing has to be done. The balance factor is "<<balanceFactor<<std::endl;
+            // rotate tree and mkae necessary structural changes
             RotationType rotationType = AvlTreeHelper::getRotationType(balanceFactor, cur);
             cur = AvlTreeHelper::rotateTree(rotationType, cur);
             this->updateParent(cur, pathStack, direction);
@@ -134,12 +135,6 @@ void AvlTreeImpl :: insert(int key) {
             break;
         }
     }
-
-    std::cout<<"Inserted "<<key<<" to the tree"<<std::endl;
-    std::cout<<"Printing"<<std::endl;
-    std::cout<<"---------"<<std::endl;
-    this->levelPrint();
-    std::cout<<"---------"<<std::endl;
 }
 
 void AvlTreeImpl :: remove(int key) {
@@ -149,19 +144,19 @@ void AvlTreeImpl :: remove(int key) {
     TreeNode* toBeRemoved = pathStack.top().first;
     Direction toBeRemovedDirection = pathStack.top().second;
 
+    // if not present, stop
     if(!toBeRemoved || toBeRemoved->getData()->data != key) {
-        std::cout<<"Key is not present"<<std::endl;
-
         return;
     }
 
+    // if it is a leaf node, delete it
     if(AvlTreeHelper::isLeafNode(toBeRemoved)) {
         pathStack.pop();
         updateParent(nullptr, pathStack, toBeRemovedDirection);
 
         delete toBeRemoved;
     }
-    else {
+    else { // else, replace it with previous highest or next lowest
         AvlTreeHelper::getPrevHighest(pathStack);
 
         if(pathStack.top().first == toBeRemoved) {
@@ -179,6 +174,7 @@ void AvlTreeImpl :: remove(int key) {
         delete toBeReplaced;
     }
 
+    // check for balance factor in the tree
     while(!pathStack.empty()) {
         TreeNode* cur = pathStack.top().first;
         Direction direction = pathStack.top().second;
@@ -191,28 +187,28 @@ void AvlTreeImpl :: remove(int key) {
             break;
         }
         else if(balanceFactor == 2 || balanceFactor == -2) {
-            std::cout<<"Balancing has to be done. The balance factor is "<<balanceFactor<<std::endl;
             RotationType rotationType = AvlTreeHelper::getRotationType(balanceFactor, cur);
             cur = AvlTreeHelper::rotateTree(rotationType, cur);
             this->updateParent(cur, pathStack, direction);
         }
     }
-
-    std::cout<<"Deleted "<<key<<" from the tree"<<std::endl;
 }
 
+// update the top-most node in the stack
 void AvlTreeImpl :: updateParent(TreeNode* cur, std::stack<std::pair<TreeNode*, Direction> >& pathStack, Direction direction) {
+    // if emoty, set cur as root
     if(pathStack.empty()) {
         this->root = cur;
 
         return;
     }
 
+    // if Lm set top-most node's left subtree as cur
     if(direction == L) {
         pathStack.top().first->setLeft(cur);
     }
     else {
-        pathStack.top().first->setRight(cur);
+        pathStack.top().first->setRight(cur); // set topmost node's right subtree as cur
     }
 }
 

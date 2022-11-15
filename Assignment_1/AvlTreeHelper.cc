@@ -6,11 +6,13 @@ AvlTreeHelper :: AvlTreeHelper() {
 AvlTreeHelper :: ~AvlTreeHelper() {
 }
 
+// get the path stack from a given node to where the insertKey exists or can be added
 std::stack<std::pair<TreeNode*, Direction> > AvlTreeHelper :: getPathStack(TreeNode* cur, int insertKey) {
     TreeNode* prev;
     std::stack<std::pair<TreeNode*, Direction> > pathStack;
     Direction direction = N;
 
+    // insert to stack and keep moving along the left sub-tree till condition is satisfied
     while(cur || !pathStack.empty()) {
         do {
             pathStack.push({cur, direction});
@@ -24,13 +26,14 @@ std::stack<std::pair<TreeNode*, Direction> > AvlTreeHelper :: getPathStack(TreeN
 
         int key = cur->getData()->data;
 
+        // return pathstack if key is already present
         if(key == insertKey || AvlTreeHelper::isLeafNode(cur)) {
             return pathStack;
         }
         else if(key < insertKey) {
             cur = cur->getRight();
 
-            // if degree is one, insert here and return
+            // this is where we fall off from the tree, can be inserted here
             if(!cur) {
                 return pathStack;
             }
@@ -38,37 +41,37 @@ std::stack<std::pair<TreeNode*, Direction> > AvlTreeHelper :: getPathStack(TreeN
             direction = R;
         }
         else {
-            return pathStack;
+            return pathStack; // return because, the keys after this point are higher than the insert key
         }
     }
-
-    std::cout<<"The path stack is empty"<<std::endl;
 
     return pathStack;
 }
 
+// check if node is leaf node
 bool AvlTreeHelper :: isLeafNode(TreeNode* cur) {
     return !cur->getLeft() && !cur->getRight();
 }
 
+// perform ll rotation
 void AvlTreeHelper :: llRotation(TreeNode* gp, TreeNode* pp, TreeNode* p) {
     TreeNode* c = pp->getRight();
 
     gp->setLeft(c);
     pp->setRight(gp);
-    std::cout<<"LL rotation done"<<std::endl;
 }
 
+// perform rr rotation
 void AvlTreeHelper :: rrRotation(TreeNode* gp, TreeNode* pp, TreeNode* p) {
     TreeNode* b = pp->getLeft();
 
     gp->setRight(b);
     pp->setLeft(gp);
-    std::cout<<"RR rotation done"<<std::endl;
 }
 
+// handle rotation of tree
 TreeNode* AvlTreeHelper :: rotateTree(RotationType rotationType, TreeNode* cur) {
-    TreeNode* newCur;
+    TreeNode* newCur; // the new node goes to the top and gp and pp become it's children incase of lr or rl rotation
     TreeNode* gp;
     TreeNode* pp;
     TreeNode* p;
@@ -76,14 +79,12 @@ TreeNode* AvlTreeHelper :: rotateTree(RotationType rotationType, TreeNode* cur) 
     switch(rotationType) {
         case LL: 
             newCur = cur->getLeft();
-            std::cout<<"Performing LL rotation"<<std::endl;
             llRotation(cur, cur->getLeft(), cur->getLeft()->getLeft());
 
             break;
 
         case RR:
             newCur = cur->getRight();
-            std::cout<<"Performing RR rotation"<<std::endl;
             rrRotation(cur, cur->getRight(), cur->getRight()->getRight());
 
             break;
@@ -95,9 +96,8 @@ TreeNode* AvlTreeHelper :: rotateTree(RotationType rotationType, TreeNode* cur) 
             pp = cur->getLeft()->getRight();
             p = cur->getLeft();
 
-            std::cout<<"Performing LR rotation"<<std::endl;
-            rrRotation(cur->getLeft(), cur->getLeft()->getRight(), cur->getLeft()->getRight()->getRight());
-            llRotation(gp, pp, p);
+            rrRotation(cur->getLeft(), cur->getLeft()->getRight(), cur->getLeft()->getRight()->getRight()); // we perform ll rr first
+            llRotation(gp, pp, p); // then we perform ll 
 
             break;
 
@@ -108,9 +108,8 @@ TreeNode* AvlTreeHelper :: rotateTree(RotationType rotationType, TreeNode* cur) 
             pp = cur->getRight()->getLeft();
             p = cur->getRight();
 
-            std::cout<<"Performing RL rotation"<<std::endl;
-            llRotation(cur->getRight(), cur->getRight()->getLeft(), cur->getRight()->getLeft()->getLeft());
-            rrRotation(gp, pp, p);
+            llRotation(cur->getRight(), cur->getRight()->getLeft(), cur->getRight()->getLeft()->getLeft()); // we perform ll first
+            rrRotation(gp, pp, p); // and then rr
 
             break;
     }
@@ -118,6 +117,7 @@ TreeNode* AvlTreeHelper :: rotateTree(RotationType rotationType, TreeNode* cur) 
     return newCur;
 }
 
+// update the left and right subtree heights, this is done incase it's children's heights have changed
 void AvlTreeHelper :: updateHeights(TreeNode* temp) {
     if(temp->getLeft()) {
         temp->setLeftHeight(temp->getLeft()->getHeight() + 1);
@@ -133,34 +133,36 @@ void AvlTreeHelper :: updateHeights(TreeNode* temp) {
     }
 }
 
+// calculates the balance factor of the node
 int AvlTreeHelper :: getBalanceFactor(TreeNode* temp) {
     return temp->getLeftHeight() - temp->getRightHeight();
 }
 
+// determines the rotation type
 RotationType AvlTreeHelper :: getRotationType(int balanceFactor, TreeNode* cur) {
+    // positive value indicates LL or LR
     if(balanceFactor > 0) {
         TreeNode* left = cur->getLeft();
 
+        // greater left subtree height indicates LL
         if(left->getLeftHeight() >= left->getRightHeight()) {
-            std::cout<<"LL rotation to be done"<<std::endl;
             return LL;
         }
 
-        std::cout<<"LR rotation to be done"<<std::endl;
         return LR;
     }
 
     TreeNode* right = cur->getRight();
 
+    // greater right subtree height indicates RR
     if(right->getRightHeight() >= right->getLeftHeight()) {
-        std::cout<<"RR rotation to be done"<<std::endl;
         return RR;
     }
 
-    std::cout<<"RL rotation to be done"<<std::endl;
     return RL;
 }
 
+// inorder traversal to print all keys in ascending order
 void AvlTreeHelper :: dfs(TreeNode* cur) {
     if(!cur) {
         return;
@@ -171,6 +173,7 @@ void AvlTreeHelper :: dfs(TreeNode* cur) {
     dfs(cur->getRight());
 }
 
+// level order traversal to print keys
 void AvlTreeHelper :: levelPrint(TreeNode* cur) {
     std::queue<TreeNode*> q;
     int level = 0;
@@ -207,6 +210,7 @@ void AvlTreeHelper :: levelPrint(TreeNode* cur) {
     }
 }
 
+// this is used to update patch stack with previous highest element, this is used while deleting a node
 void AvlTreeHelper :: getPrevHighest(std::stack<std::pair<TreeNode*, Direction> >& pathStack) {
     TreeNode* cur = pathStack.top().first;
     if(!cur->getLeft()) {
@@ -223,6 +227,7 @@ void AvlTreeHelper :: getPrevHighest(std::stack<std::pair<TreeNode*, Direction> 
     }
 }
 
+// this is used to update patch stack with next lowest element, this is used while deleting a node
 void AvlTreeHelper :: getNextLowest(std::stack<std::pair<TreeNode*, Direction> >& pathStack) {
     TreeNode* cur = pathStack.top().first;
     if(!cur->getRight()) {

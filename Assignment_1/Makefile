@@ -18,17 +18,17 @@ main: Utils.o AvlTreeHelper.o AvlTreeImpl.o TreeNode.o main.o
 main.o: main.cc
 	$(CC) -g -c main.cc
 
-Utils.o: Utils.cc
-	$(CC) -g -c Utils.cc
+Utils.o: Utils/Utils.cc
+	$(CC) -g -c Utils/Utils.cc
 
-AvlTreeHelper.o: AvlTreeHelper.cc
-	$(CC) -g -c AvlTreeHelper.cc
+AvlTreeHelper.o: Tree/AvlTreeHelper.cc
+	$(CC) -g -c Tree/AvlTreeHelper.cc
 
-AvlTreeImpl.o: AvlTreeImpl.cc
-	$(CC) -g -c AvlTreeImpl.cc
+AvlTreeImpl.o: Tree/AvlTreeImpl.cc
+	$(CC) -g -c Tree/AvlTreeImpl.cc
 
-TreeNode.o: TreeNode.cc
-	$(CC) -g -c TreeNode.cc
+TreeNode.o: Tree/TreeNode.cc
+	$(CC) -g -c Tree/TreeNode.cc
 
 clean:
 	rm -f *.o

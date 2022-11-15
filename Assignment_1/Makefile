@@ -27,8 +27,8 @@ AvlTreeHelper.o: Tree/AvlTreeHelper.cc
 AvlTreeImpl.o: Tree/AvlTreeImpl.cc
 	$(CC) -g -c Tree/AvlTreeImpl.cc
 
-TreeNode.o: Tree/TreeNode.cc
-	$(CC) -g -c Tree/TreeNode.cc
+TreeNode.o: Node/TreeNode.cc
+	$(CC) -g -c Node/TreeNode.cc
 
 clean:
 	rm -f *.o

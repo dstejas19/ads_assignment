@@ -33,5 +33,6 @@ TreeNode.o: Node/TreeNode.cc
 clean:
 	rm -f *.o
 	rm -f *.out
-	rm output_file.txt
-	rm avltree
+	rm -f output_file.txt 
+	rm -f avltree
+	rm -f main
